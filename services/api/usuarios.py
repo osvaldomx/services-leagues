@@ -66,3 +66,14 @@ def get_all_users():
                         .dump(usuarios_obj))
 
     return bad_request()
+
+@usuario.route("/perfil")
+@Auth.user_auth_required
+def get():
+    data = request.headers
+    sesion = Auth.decode_token(data['Authorization'])
+    email = sesion['data']['user_email']
+    usuario = Usuario.get_user_by_email(email)
+    usuario_schema = UsuarioSchema().dump(usuario)
+
+    return response(usuario_schema)
