@@ -54,7 +54,6 @@ class Usuario(db.Model):
     @classmethod
     def authenticate(cls, email, password):
         user = cls.get_user_by_email(email)
-    
         if user and cls.verify_password(user, password):
             return user    
 
