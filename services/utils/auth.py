@@ -42,7 +42,7 @@ class Auth():
         }
 
         try:
-            payload = jwt.decode(token, os.getenv("SECRET_KEY"))
+            payload = jwt.decode(token, os.getenv("SECRET_KEY"), algorithms='HS256')
             res['data'] = payload
             return res
         except jwt.ExpiredSignatureError as ese:
